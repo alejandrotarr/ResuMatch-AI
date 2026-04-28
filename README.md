@@ -82,15 +82,13 @@ streamlit run app/app.py
 
 ## 🎥 Presentation Recording
 
-> _Link will be added after submission_
-
+> https://drive.google.com/file/d/1845fhagjqunGQkeSi5aCKv3LsEx0WNXc/view?usp=drive_link
 ---
 
 ## 👥 Team Members
 
-- [Your Name Here]
-- [Team Member 2]
-- [Team Member 3]
+- Alejandro Tarruella
+- Daniel Tarruella
 
 ---
 
