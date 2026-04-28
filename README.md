@@ -88,8 +88,9 @@ streamlit run app/app.py
 
 ## 👥 Team Members
 
-- Alejandro Tarruella
-- Daniel Tarruella
+- [Your Name Here]
+- [Team Member 2]
+- [Team Member 3]
 
 ---
 
