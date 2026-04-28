@@ -15,13 +15,18 @@ import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('Agg')
 
-import nltk
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-
-nltk.download('stopwords', quiet=True)
-nltk.download('wordnet', quiet=True)
-nltk.download('omw-1.4', quiet=True)
+# Built-in stopwords — no internet or NLTK needed
+STOP_WORDS = {
+    'i','me','my','we','our','you','your','he','him','his','she','her','it',
+    'its','they','them','their','what','which','who','this','that','these',
+    'those','am','is','are','was','were','be','been','being','have','has',
+    'had','do','does','did','a','an','the','and','but','if','or','as','at',
+    'by','for','with','about','into','through','during','before','after','to',
+    'from','up','in','out','on','off','then','here','there','when','where',
+    'all','both','each','more','most','other','some','no','not','only','own',
+    'so','than','too','very','can','will','just','should','now','also','would',
+    'could','may','might','shall','us','ll','ve','re','don',
+}
 
 # ─── Page Config ──────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -86,17 +91,15 @@ def load_models():
 
 tfidf, rf = load_models()
 
-# ─── Text Cleaning ────────────────────────────────────────────────────────────
-STOP_WORDS = set(stopwords.words('english'))
-lemmatizer = WordNetLemmatizer()
-
 def clean_text(text):
+    if not text or str(text).strip() == '':
+        return ""
     text = str(text).lower()
+    text = re.sub(r"[\[\]'\"{}()]", ' ', text)
     text = re.sub(r'http\S+|www\S+', '', text)
-    text = re.sub(r'[^a-z\s]', ' ', text)
+    text = re.sub(r'[^a-z0-9\s]', ' ', text)
     text = re.sub(r'\s+', ' ', text).strip()
-    tokens = text.split()
-    tokens = [lemmatizer.lemmatize(w) for w in tokens if w not in STOP_WORDS and len(w) > 2]
+    tokens = [w for w in text.split() if w not in STOP_WORDS and len(w) > 2]
     return ' '.join(tokens)
 
 def compute_score(resume_text, jd_text):
